@@ -31,6 +31,10 @@
 }
 
 .mui-navlink {
+  padding-left: 8px !important;
   border-radius: 8px !important;
+  gap: 5px !important;
+  justify-items: center !important;
+  justify-content: center !important;
   color: var(--NavItem-active-color) !important;
 }

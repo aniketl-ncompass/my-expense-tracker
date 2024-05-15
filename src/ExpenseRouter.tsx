@@ -1,5 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import Dashboard from "./views/Dashboard/Dashboard";
+import Dashboard from "./views/Dashboard/DashboardContainer";
+import DashboardOutlet from "./views/Dashboard/Dashboard";
 import Account from "./views/Dashboard/Account";
 import Settings from "./views/Dashboard/Settings";
 
@@ -18,10 +19,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
+    element: <Dashboard />,
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <DashboardOutlet />,
       },
       {
         path: "account",

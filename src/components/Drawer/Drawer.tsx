@@ -11,6 +11,7 @@ import {
   ListItemText,
   Typography,
   List as MUIList,
+  Tooltip,
 } from "@mui/material";
 import {
   ChartPie,
@@ -44,7 +45,11 @@ function Drawer() {
     <div>
       <Toolbar sx={{ py: "1.5rem" }}>
         <IconButton disableFocusRipple disableRipple disableTouchRipple>
-          <Tree className={DrawerStyles["action-active"]} size={32} color="white" />
+          <Tree
+            className={DrawerStyles["action-active"]}
+            size={32}
+            color="white"
+          />
           <Typography sx={{ ml: "5px" }} color="white" variant="h6">
             Expense Tracker
           </Typography>
@@ -56,24 +61,30 @@ function Drawer() {
           <ListItem key={text + index}>
             <ListItemButton
               component={NavLink}
+              end
               to={
                 text === "Overview"
                   ? "/dashboard"
                   : text === "Settings"
-                  ? "settings"
-                  : "account"
+                  ? "/dashboard/settings"
+                  : "/dashboard/account"
               }
-              sx={{ pl: "8px" }}
               className={DrawerStyles["mui-navlink"]}
             >
               {text === "Overview" ? (
-                <ChartPie className={DrawerStyles["action-active"]} color="white"/>
+                <ChartPie
+                  className={DrawerStyles["action-active"]}
+                  color="white"
+                />
               ) : text === "Settings" ? (
-                <GearSix className={DrawerStyles["action-active"]} color="white"/>
+                <GearSix
+                  className={DrawerStyles["action-active"]}
+                  color="white"
+                />
               ) : (
-                <User className={DrawerStyles["action-active"]} color="white"/>
+                <User className={DrawerStyles["action-active"]} color="white" />
               )}
-              <ListItemText primary={text} sx={{ ml: "5px" }} />
+              <ListItemText primary={text}/>
             </ListItemButton>
           </ListItem>
         ))}
@@ -84,6 +95,7 @@ function Drawer() {
     <div>
       <CssBaseline />
       <AppBar
+        elevation={0}
         color="transparent"
         variant="outlined"
         position="fixed"
@@ -93,22 +105,26 @@ function Drawer() {
         }}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="toggle drawer"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <List className={DrawerStyles["action-active"]} />
-          </IconButton>
-          <IconButton
-            color="inherit"
-            edge="start"
-            aria-label="search expense"
-            sx={{ mr: 2 }}
-          >
-            <MagnifyingGlass className={DrawerStyles["action-active"]} />
-          </IconButton>
+          <Tooltip title="Sidebar" placement="bottom">
+            <IconButton
+              color="inherit"
+              aria-label="toggle drawer"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: "none" } }}
+            >
+              <List className={DrawerStyles["action-active"]} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Search" placement="bottom">
+            <IconButton
+              color="inherit"
+              edge="start"
+              aria-label="search expense"
+              sx={{ mr: 2 }}
+            >
+              <MagnifyingGlass className={DrawerStyles["action-active"]} />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       <Box
