@@ -4,10 +4,10 @@
   user-select: none;
 }
 .font-small {
-  font-size: 1.25rem;
+  font-size: 1.25rem !important;
 }
 .font-big {
-  font-size: 2rem;
+  font-size: 2rem !important;
 }
 .mui-drawer {
   box-sizing: border-box !important;

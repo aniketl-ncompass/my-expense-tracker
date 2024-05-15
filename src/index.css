@@ -21,6 +21,7 @@
   --palette-neutral-900: #212636;
   --palette-neutral-950: #121621;
   --palette-primary-main: #635bff;
+  --palette-warning-main: #fb9c0c;
   --palette-primary-contrastText: var(--palette-common-white);
   --palette-background-default: var(--palette-common-white);
   --palette-background-paper: var(--palette-common-white);
@@ -75,8 +76,4 @@ body {
 
 .MuiDrawer-root a.active {
   background-color: var(--NavItem-active-background) !important;
-}
-
-.text-secondary {
-  color: var(--palette-text-secondary) !important;
 }

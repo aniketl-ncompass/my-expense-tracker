@@ -10,8 +10,8 @@ function DashboardContainer() {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - 240px)` },
+          p: "3.5rem 1.5rem 1.5rem",
+          width: { lg: `calc(100% - 270px)` },
         }}
       >
         <Toolbar />

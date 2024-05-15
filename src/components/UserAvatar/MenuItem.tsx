@@ -65,7 +65,7 @@ function MenuItem({ anchorElUser, handleCloseUserMenu }: IMenuItem) {
     >
       <Box className={MenuItemStyles["mui-menuItem-header"]}>
         <Typography variant="subtitle1">Sofia Rivers</Typography>
-        <Typography variant="body2" className="text-secondary">
+        <Typography variant="body2" color="text.secondary">
           sofia.rivers@devias.io
         </Typography>
       </Box>

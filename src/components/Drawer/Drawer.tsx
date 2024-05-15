@@ -26,6 +26,57 @@ import DrawerStyles from "./drawer.module.css";
 import { NavLink } from "react-router-dom";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
+const DrawerLists = () => (
+  <div>
+    <Toolbar sx={{ py: "1.5rem" }}>
+      <IconButton disableFocusRipple disableRipple disableTouchRipple>
+        <Tree
+          className={DrawerStyles["action-active"]}
+          size={32}
+          color="white"
+        />
+        <Typography sx={{ ml: "5px" }} color="white" variant="h6">
+          Expense Tracker
+        </Typography>
+      </IconButton>
+    </Toolbar>
+    <Divider className={DrawerStyles["mui-mobile-divider"]} />
+    <MUIList>
+      {["Overview", "Settings", "Account"].map((text, index) => (
+        <ListItem key={text + index}>
+          <ListItemButton
+            component={NavLink}
+            end
+            to={
+              text === "Overview"
+                ? "/dashboard"
+                : text === "Settings"
+                ? "/dashboard/settings"
+                : "/dashboard/account"
+            }
+            className={DrawerStyles["mui-navlink"]}
+          >
+            {text === "Overview" ? (
+              <ChartPie
+                className={DrawerStyles["action-active"]}
+                color="white"
+              />
+            ) : text === "Settings" ? (
+              <GearSix
+                className={DrawerStyles["action-active"]}
+                color="white"
+              />
+            ) : (
+              <User className={DrawerStyles["action-active"]} color="white" />
+            )}
+            <ListItemText primary={text} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </MUIList>
+  </div>
+);
+
 function Drawer() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -43,56 +94,6 @@ function Drawer() {
     setMobileOpen(false);
   };
 
-  const drawer = (
-    <div>
-      <Toolbar sx={{ py: "1.5rem" }}>
-        <IconButton disableFocusRipple disableRipple disableTouchRipple>
-          <Tree
-            className={DrawerStyles["action-active"]}
-            size={32}
-            color="white"
-          />
-          <Typography sx={{ ml: "5px" }} color="white" variant="h6">
-            Expense Tracker
-          </Typography>
-        </IconButton>
-      </Toolbar>
-      <Divider className={DrawerStyles["mui-mobile-divider"]} />
-      <MUIList>
-        {["Overview", "Settings", "Account"].map((text, index) => (
-          <ListItem key={text + index}>
-            <ListItemButton
-              component={NavLink}
-              end
-              to={
-                text === "Overview"
-                  ? "/dashboard"
-                  : text === "Settings"
-                  ? "/dashboard/settings"
-                  : "/dashboard/account"
-              }
-              className={DrawerStyles["mui-navlink"]}
-            >
-              {text === "Overview" ? (
-                <ChartPie
-                  className={DrawerStyles["action-active"]}
-                  color="white"
-                />
-              ) : text === "Settings" ? (
-                <GearSix
-                  className={DrawerStyles["action-active"]}
-                  color="white"
-                />
-              ) : (
-                <User className={DrawerStyles["action-active"]} color="white" />
-              )}
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </MUIList>
-    </div>
-  );
   return (
     <div>
       <CssBaseline />
@@ -102,8 +103,8 @@ function Drawer() {
         variant="outlined"
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - 270px)` },
-          ml: { sm: `270px` },
+          width: { lg: `calc(100% - 270px)` },
+          ml: { lg: `270px` },
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -112,7 +113,7 @@ function Drawer() {
               <IconButton
                 color="inherit"
                 aria-label="toggle drawer"
-                sx={{ mr: 2, display: { sm: "none" } }}
+                sx={{ mr: 2, display: { lg: "none" } }}
                 onClick={handleDrawerToggle}
               >
                 <List className={DrawerStyles["action-active"]} />
@@ -136,14 +137,14 @@ function Drawer() {
       <Box
         component="nav"
         aria-label="Drawer section"
-        sx={{ width: { sm: "270px" }, flexShrink: { sm: 0 } }}
+        sx={{ width: { lg: "270px" }, flexShrink: { sm: 0 } }}
       >
         <MUIDrawer
           variant="temporary"
           open={mobileOpen}
           aria-label="mobile drawer"
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", lg: "none" },
           }}
           ModalProps={{
             keepMounted: true,
@@ -154,20 +155,20 @@ function Drawer() {
           onClose={handleDrawerClose}
           onTransitionEnd={handleDrawerTransitionEnd}
         >
-          {drawer}
+          <DrawerLists />
         </MUIDrawer>
         <MUIDrawer
           open
           variant="permanent"
           aria-label="desktop drawer"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", lg: "block" },
           }}
           PaperProps={{
             className: `${DrawerStyles["mui-drawer"]} ${DrawerStyles["mui-desktop"]}`,
           }}
         >
-          {drawer}
+          <DrawerLists />
         </MUIDrawer>
       </Box>
     </div>

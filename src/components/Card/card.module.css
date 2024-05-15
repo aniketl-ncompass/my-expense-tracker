@@ -1,0 +1,23 @@
+.mui-card {
+  border-radius: 20px !important;
+  background-color: var(--palette-background-paper) !important;
+  color: var(--palette-text-primary) !important;
+  height:180px;
+}
+
+.mui-card-content {
+  height:100%;
+  padding: 1.8rem 1.5rem !important;
+}
+
+.mui-card-icon {
+  width: 56px !important;
+  height: 56px !important;
+  user-select: none;
+}
+.mui-card-primary {
+  background-color: var(--palette-primary-main) !important;
+}
+.mui-card-secondary {
+  background-color: var(--palette-warning-main) !important;
+}
