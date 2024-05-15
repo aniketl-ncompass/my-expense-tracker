@@ -22,6 +22,7 @@ import {
 } from "@phosphor-icons/react";
 import { useState } from "react";
 import DrawerStyles from "./drawer.module.css";
+import { NavLink } from "react-router-dom";
 
 function Drawer() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -41,17 +42,30 @@ function Drawer() {
   };
   const drawer = (
     <div>
-      <Toolbar>
+      <Toolbar sx={{ py: "1rem" }}>
         <IconButton disableFocusRipple disableRipple disableTouchRipple>
-          <Tree className={DrawerStyles["action-active"]} />
-          <Typography sx={{ ml: "5px" }}>Expense Tracker</Typography>
+          <Tree className={DrawerStyles["action-active"]} color="white" />
+          <Typography sx={{ ml: "5px" }} color="white">
+            Expense Tracker
+          </Typography>
         </IconButton>
       </Toolbar>
-      <Divider />
+      <Divider className={DrawerStyles["mui-mobile-divider"]} />
       <MUIList>
         {["Overview", "Settings", "Account"].map((text, index) => (
           <ListItem key={text + index}>
-            <ListItemButton sx={{ pl: "8px" }}>
+            <ListItemButton
+              component={NavLink}
+              to={
+                text === "Overview"
+                  ? "/dashboard"
+                  : text === "Settings"
+                  ? "settings"
+                  : "account"
+              }
+              sx={{ pl: "8px" }}
+              className={DrawerStyles["mui-navlink"]}
+            >
               {text === "Overview" ? (
                 <ChartPie className={DrawerStyles["action-active"]} />
               ) : text === "Settings" ? (
@@ -111,12 +125,9 @@ function Drawer() {
           ModalProps={{
             keepMounted: true,
           }}
+          PaperProps={{ className: DrawerStyles["mui-mobile-drawer"] }}
           sx={{
             display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: "240px",
-            },
           }}
         >
           {drawer}

@@ -10,10 +10,29 @@
 
   /* COLOR VARIABLES */
   --palette-common-white: #ffffff;
+  --palette-neutral-300: #b3b9c6;
+  --palette-neutral-400: #8a94a6;
+  --palette-neutral-500: #667085;
+  --palette-neutral-600: #565e73;
+  --palette-neutral-700: #434a60;
   --palette-neutral-900: #212636;
+  --palette-neutral-950: #121621;
   --palette-text-primary: var(--palette-neutral-900);
+  --palette-primary-main: #635bff;
+  --palette-primary-contrastText: var(--palette-common-white);
   --palette-background-default: var(--palette-common-white);
-  --mui-palette-action-active: rgba(0, 0, 0, 0.54);
+  --palette-action-active: rgba(0, 0, 0, 0.54);
+
+  --mui-shadows-16: 0px 6px 30px rgba(0, 0, 0, 0.08);
+
+  --NavItem-color: var(--palette-neutral-300);
+  --NavItem-hover-background: rgba(255, 255, 255, 0.04);
+  --NavItem-active-background: var(--palette-primary-main);
+  --NavItem-active-color: var(--palette-primary-contrastText);
+  --NavItem-disabled-color: var(--palette-neutral-500);
+  --NavItem-icon-color: var(--palette-neutral-400);
+  --NavItem-icon-active-color: var(--palette-primary-contrastText);
+  --NavItem-icon-disabled-color: var(--palette-neutral-600);
 }
 
 body {
@@ -25,4 +44,8 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   background-color: var(--palette-background-default);
+}
+
+.MuiDrawer-root a.active {
+  background-color: var(--NavItem-active-background) !important;
 }

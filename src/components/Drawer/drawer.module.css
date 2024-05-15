@@ -3,3 +3,27 @@
   font-size: 1.5rem;
   user-select: none;
 }
+.mui-mobile-drawer {
+  box-sizing: border-box !important;
+  box-shadow: var(--mui-shadows-16) !important;
+
+  background-color: var(--MobileNav-background) !important;
+  color: var(--MobileNav-color) !important;
+  max-width: 100%;
+  scrollbar-width: none;
+  width: var(--MobileNav-width) !important;
+  z-index: var(--MobileNav-zIndex) !important;
+  --MobileNav-color: var(--palette-common-white);
+  --MobileNav-width: 320px;
+  --MobileNav-zIndex: 1100;
+  --MobileNav-background: var(--palette-neutral-950);
+}
+
+.mui-mobile-divider {
+  border-color: var(--palette-neutral-700) !important;
+}
+
+.mui-navlink {
+  border-radius: 8px !important;
+  color: var(--NavItem-active-color) !important;
+}
