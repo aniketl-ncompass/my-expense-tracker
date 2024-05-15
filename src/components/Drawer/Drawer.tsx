@@ -96,7 +96,7 @@ function Drawer() {
       <CssBaseline />
       <AppBar
         elevation={0}
-        color="transparent"
+        color="default"
         variant="outlined"
         position="fixed"
         sx={{
