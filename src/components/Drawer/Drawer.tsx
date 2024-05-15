@@ -12,6 +12,9 @@ import {
   Typography,
   List as MUIList,
   Tooltip,
+  Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import {
   ChartPie,
@@ -40,6 +43,16 @@ function Drawer() {
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
+  };
+
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
   const drawer = (
     <div>
@@ -84,7 +97,7 @@ function Drawer() {
               ) : (
                 <User className={DrawerStyles["action-active"]} color="white" />
               )}
-              <ListItemText primary={text}/>
+              <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -96,7 +109,7 @@ function Drawer() {
       <CssBaseline />
       <AppBar
         elevation={0}
-        color="default"
+        color="inherit"
         variant="outlined"
         position="fixed"
         sx={{
@@ -104,27 +117,75 @@ function Drawer() {
           ml: { sm: `270px` },
         }}
       >
-        <Toolbar>
-          <Tooltip title="Sidebar" placement="bottom">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <div>
+            <Tooltip title="Sidebar" placement="bottom">
+              <IconButton
+                color="inherit"
+                aria-label="toggle drawer"
+                sx={{ mr: 2, display: { sm: "none" } }}
+                onClick={handleDrawerToggle}
+              >
+                <List className={DrawerStyles["action-active"]} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Search" placement="bottom">
+              <IconButton
+                color="inherit"
+                edge="start"
+                aria-label="search expense"
+                sx={{ mr: 2 }}
+              >
+                <MagnifyingGlass className={DrawerStyles["action-active"]} />
+              </IconButton>
+            </Tooltip>
+          </div>
+          {/* AVATAR */}
+          <Box sx={{ flexGrow: 0 }}>
             <IconButton
-              color="inherit"
-              aria-label="toggle drawer"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
+              onClick={handleOpenUserMenu}
+              sx={{ p: 0 }}
+              disableRipple
+              disableFocusRipple
+              disableTouchRipple
             >
-              <List className={DrawerStyles["action-active"]} />
+              <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
             </IconButton>
-          </Tooltip>
-          <Tooltip title="Search" placement="bottom">
-            <IconButton
-              color="inherit"
-              edge="start"
-              aria-label="search expense"
-              sx={{ mr: 2 }}
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              keepMounted
+              sx={{ mt: "50px" }}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
-              <MagnifyingGlass className={DrawerStyles["action-active"]} />
-            </IconButton>
-          </Tooltip>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Menu</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">
+                  sofia.rivers@devias.io
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Settings</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Sign out</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -135,30 +196,30 @@ function Drawer() {
         <MUIDrawer
           variant="temporary"
           open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
-          onClose={handleDrawerClose}
+          aria-label="mobile drawer"
+          sx={{
+            display: { xs: "block", sm: "none" },
+          }}
           ModalProps={{
             keepMounted: true,
           }}
           PaperProps={{
             className: `${DrawerStyles["mui-drawer"]} ${DrawerStyles["mui-mobile"]}`,
           }}
-          aria-label="mobile drawer"
-          sx={{
-            display: { xs: "block", sm: "none" },
-          }}
+          onClose={handleDrawerClose}
+          onTransitionEnd={handleDrawerTransitionEnd}
         >
           {drawer}
         </MUIDrawer>
         <MUIDrawer
           open
           variant="permanent"
-          PaperProps={{
-            className: `${DrawerStyles["mui-drawer"]} ${DrawerStyles["mui-desktop"]}`,
-          }}
           aria-label="desktop drawer"
           sx={{
             display: { xs: "none", sm: "block" },
+          }}
+          PaperProps={{
+            className: `${DrawerStyles["mui-drawer"]} ${DrawerStyles["mui-desktop"]}`,
           }}
         >
           {drawer}
