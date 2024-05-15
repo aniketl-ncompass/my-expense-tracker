@@ -1,0 +1,25 @@
+.mui-menu {
+  background-color: var(--palette-background-paper) !important;
+  color: var(--palette-text-primary) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--shadows-8) !important;
+  width: 240px;
+}
+
+.mui-menuItem-header {
+  padding: 0.5rem 1rem 0.8rem !important;
+}
+
+.mui-menu-list-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-bottom: 0px !important;
+}
+
+.mui-menu-listItem {
+  width: calc(100% - 6%);
+  border-radius: 8px !important;
+  padding: 0.4rem 1rem !important;
+}

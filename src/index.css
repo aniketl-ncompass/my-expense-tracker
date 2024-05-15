@@ -9,6 +9,9 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* COLOR VARIABLES */
+  --palette-text-primary: var(--palette-neutral-900);
+  --palette-text-secondary: var(--palette-neutral-500);
+
   --palette-common-white: #ffffff;
   --palette-neutral-300: #b3b9c6;
   --palette-neutral-400: #8a94a6;
@@ -17,13 +20,11 @@
   --palette-neutral-700: #434a60;
   --palette-neutral-900: #212636;
   --palette-neutral-950: #121621;
-  --palette-text-primary: var(--palette-neutral-900);
   --palette-primary-main: #635bff;
   --palette-primary-contrastText: var(--palette-common-white);
   --palette-background-default: var(--palette-common-white);
+  --palette-background-paper: var(--palette-common-white);
   --palette-action-active: rgba(0, 0, 0, 0.54);
-
-  --mui-shadows-16: 0px 6px 30px rgba(0, 0, 0, 0.08);
 
   --NavItem-color: var(--palette-neutral-300);
   --NavItem-hover-background: rgba(255, 255, 255, 0.04);
@@ -33,6 +34,32 @@
   --NavItem-icon-color: var(--palette-neutral-400);
   --NavItem-icon-active-color: var(--palette-primary-contrastText);
   --NavItem-icon-disabled-color: var(--palette-neutral-600);
+
+  --shadows-0: none;
+  --shadows-1: 0px 1px 2px rgba(0, 0, 0, 0.08);
+  --shadows-2: 0px 1px 5px rgba(0, 0, 0, 0.08);
+  --shadows-3: 0px 1px 8px rgba(0, 0, 0, 0.08);
+  --shadows-4: 0px 1px 10px rgba(0, 0, 0, 0.08);
+  --shadows-5: 0px 1px 14px rgba(0, 0, 0, 0.08);
+  --shadows-6: 0px 1px 18px rgba(0, 0, 0, 0.08);
+  --shadows-7: 0px 2px 16px rgba(0, 0, 0, 0.08);
+  --shadows-8: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  --shadows-9: 0px 3px 16px rgba(0, 0, 0, 0.08);
+  --shadows-10: 0px 4px 18px rgba(0, 0, 0, 0.08);
+  --shadows-11: 0px 4px 20px rgba(0, 0, 0, 0.08);
+  --shadows-12: 0px 5px 22px rgba(0, 0, 0, 0.08);
+  --shadows-13: 0px 5px 24px rgba(0, 0, 0, 0.08);
+  --shadows-14: 0px 5px 26px rgba(0, 0, 0, 0.08);
+  --shadows-15: 0px 6px 28px rgba(0, 0, 0, 0.08);
+  --shadows-16: 0px 6px 30px rgba(0, 0, 0, 0.08);
+  --shadows-17: 0px 6px 32px rgba(0, 0, 0, 0.08);
+  --shadows-18: 0px 7px 34px rgba(0, 0, 0, 0.08);
+  --shadows-19: 0px 7px 36px rgba(0, 0, 0, 0.08);
+  --shadows-20: 0px 8px 38px rgba(0, 0, 0, 0.08);
+  --shadows-21: 0px 8px 40px rgba(0, 0, 0, 0.08);
+  --shadows-22: 0px 8px 42px rgba(0, 0, 0, 0.08);
+  --shadows-23: 0px 9px 44px rgba(0, 0, 0, 0.08);
+  --shadows-24: 0px 9px 46px rgba(0, 0, 0, 0.08);
 }
 
 body {
@@ -48,4 +75,8 @@ body {
 
 .MuiDrawer-root a.active {
   background-color: var(--NavItem-active-background) !important;
+}
+
+.text-secondary {
+  color: var(--palette-text-secondary) !important;
 }

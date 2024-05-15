@@ -12,9 +12,6 @@ import {
   Typography,
   List as MUIList,
   Tooltip,
-  Avatar,
-  Menu,
-  MenuItem,
 } from "@mui/material";
 import {
   ChartPie,
@@ -27,6 +24,7 @@ import {
 import { useState } from "react";
 import DrawerStyles from "./drawer.module.css";
 import { NavLink } from "react-router-dom";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 function Drawer() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -45,15 +43,6 @@ function Drawer() {
     setMobileOpen(false);
   };
 
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
   const drawer = (
     <div>
       <Toolbar sx={{ py: "1.5rem" }}>
@@ -141,51 +130,7 @@ function Drawer() {
             </Tooltip>
           </div>
           {/* AVATAR */}
-          <Box sx={{ flexGrow: 0 }}>
-            <IconButton
-              onClick={handleOpenUserMenu}
-              sx={{ p: 0 }}
-              disableRipple
-              disableFocusRipple
-              disableTouchRipple
-            >
-              <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              keepMounted
-              sx={{ mt: "50px" }}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Menu</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  sofia.rivers@devias.io
-                </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Settings</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Profile</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Sign out</Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
+          <UserAvatar />
         </Toolbar>
       </AppBar>
       <Box
