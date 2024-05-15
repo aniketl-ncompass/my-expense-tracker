@@ -42,10 +42,10 @@ function Drawer() {
   };
   const drawer = (
     <div>
-      <Toolbar sx={{ py: "1rem" }}>
+      <Toolbar sx={{ py: "1.5rem" }}>
         <IconButton disableFocusRipple disableRipple disableTouchRipple>
-          <Tree className={DrawerStyles["action-active"]} color="white" />
-          <Typography sx={{ ml: "5px" }} color="white">
+          <Tree className={DrawerStyles["action-active"]} size={32} color="white" />
+          <Typography sx={{ ml: "5px" }} color="white" variant="h6">
             Expense Tracker
           </Typography>
         </IconButton>
@@ -67,11 +67,11 @@ function Drawer() {
               className={DrawerStyles["mui-navlink"]}
             >
               {text === "Overview" ? (
-                <ChartPie className={DrawerStyles["action-active"]} />
+                <ChartPie className={DrawerStyles["action-active"]} color="white"/>
               ) : text === "Settings" ? (
-                <GearSix className={DrawerStyles["action-active"]} />
+                <GearSix className={DrawerStyles["action-active"]} color="white"/>
               ) : (
-                <User className={DrawerStyles["action-active"]} />
+                <User className={DrawerStyles["action-active"]} color="white"/>
               )}
               <ListItemText primary={text} sx={{ ml: "5px" }} />
             </ListItemButton>
@@ -84,13 +84,12 @@ function Drawer() {
     <div>
       <CssBaseline />
       <AppBar
-        elevation={0}
-        variant="outlined"
         color="transparent"
+        variant="outlined"
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - 240px)` },
-          ml: { sm: `240px` },
+          width: { sm: `calc(100% - 270px)` },
+          ml: { sm: `270px` },
         }}
       >
         <Toolbar>
@@ -104,8 +103,8 @@ function Drawer() {
           </IconButton>
           <IconButton
             color="inherit"
-            aria-label="search expense"
             edge="start"
+            aria-label="search expense"
             sx={{ mr: 2 }}
           >
             <MagnifyingGlass className={DrawerStyles["action-active"]} />
@@ -114,8 +113,8 @@ function Drawer() {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: "240px" }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+        aria-label="Drawer section"
+        sx={{ width: { sm: "270px" }, flexShrink: { sm: 0 } }}
       >
         <MUIDrawer
           variant="temporary"
@@ -125,7 +124,10 @@ function Drawer() {
           ModalProps={{
             keepMounted: true,
           }}
-          PaperProps={{ className: DrawerStyles["mui-mobile-drawer"] }}
+          PaperProps={{
+            className: `${DrawerStyles["mui-drawer"]} ${DrawerStyles["mui-mobile"]}`,
+          }}
+          aria-label="mobile drawer"
           sx={{
             display: { xs: "block", sm: "none" },
           }}
@@ -135,12 +137,12 @@ function Drawer() {
         <MUIDrawer
           open
           variant="permanent"
+          PaperProps={{
+            className: `${DrawerStyles["mui-drawer"]} ${DrawerStyles["mui-desktop"]}`,
+          }}
+          aria-label="desktop drawer"
           sx={{
             display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: "240px",
-            },
           }}
         >
           {drawer}

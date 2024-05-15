@@ -1,22 +1,29 @@
 .action-active {
-  color: var(--mui-palette-action-active);
+  color: var(--palette-action-active);
   font-size: 1.5rem;
   user-select: none;
 }
-.mui-mobile-drawer {
+.mui-drawer {
   box-sizing: border-box !important;
   box-shadow: var(--mui-shadows-16) !important;
 
-  background-color: var(--MobileNav-background) !important;
-  color: var(--MobileNav-color) !important;
+  background-color: var(--Nav-background) !important;
+  color: var(--Nav-color) !important;
   max-width: 100%;
   scrollbar-width: none;
+
+  --Nav-color: var(--palette-common-white);
+  --Nav-background: var(--palette-neutral-950);
+}
+.mui-desktop {
+  width: var(--DesktopNav-width) !important;
+  --DesktopNav-width: 270px;
+}
+.mui-mobile {
   width: var(--MobileNav-width) !important;
   z-index: var(--MobileNav-zIndex) !important;
-  --MobileNav-color: var(--palette-common-white);
   --MobileNav-width: 320px;
   --MobileNav-zIndex: 1100;
-  --MobileNav-background: var(--palette-neutral-950);
 }
 
 .mui-mobile-divider {
