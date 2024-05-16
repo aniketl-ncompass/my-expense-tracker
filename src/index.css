@@ -22,6 +22,7 @@
   --palette-neutral-950: #121621;
   --palette-primary-main: #635bff;
   --palette-warning-main: #fb9c0c;
+  --palette-success-main: #15b79f;
   --palette-primary-contrastText: var(--palette-common-white);
   --palette-background-default: var(--palette-common-white);
   --palette-background-paper: var(--palette-common-white);
