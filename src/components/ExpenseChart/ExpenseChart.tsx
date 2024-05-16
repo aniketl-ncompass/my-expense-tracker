@@ -12,7 +12,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CardStyles from "../Card/card.module.css";
 import DrawerStyles from "../Drawer/drawer.module.css";
 import ExpenseChartStyles from "./expenseChart.module.css";
-import { ArrowClockwise, ArrowRight, Divide } from "@phosphor-icons/react";
+import { ArrowClockwise, ArrowRight } from "@phosphor-icons/react";
 
 function ExpenseChart() {
   return (
