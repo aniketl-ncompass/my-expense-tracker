@@ -13,8 +13,73 @@ import CardStyles from "../Card/card.module.css";
 import DrawerStyles from "../Drawer/drawer.module.css";
 import ExpenseChartStyles from "./expenseChart.module.css";
 import { ArrowClockwise, ArrowRight } from "@phosphor-icons/react";
+import { useMediaQuery } from "react-responsive";
+import { useState } from "react";
+
+const ApexCharInit: Record<string, any> = {
+  chart: {
+    id: "apex-chart",
+    width: "100%",
+    stacked: false,
+    toolbar: { show: false },
+  },
+  grid: {
+    show: true,
+    borderColor: "#dcdfe4",
+    strokeDashArray: 2,
+  },
+  colors: ["#635bff", "#635bff40"],
+  labels: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
+  legend: {
+    show: false,
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  yaxis: {
+    show: true,
+    labels: {
+      formatter: function (val: number) {
+        return val >= 1000 ? val / 1000 + "K" : val.toString();
+      },
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "100%",
+    },
+  },
+};
 
 function ExpenseChart() {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const [chartOptions, setChartOptions] = useState(ApexCharInit);
+
+  const handleSyncClick = () => {
+    setChartOptions((prevOptions) => ({
+      ...prevOptions,
+      chart: {
+        ...prevOptions.chart,
+        selection: {
+          enabled: false,
+        },
+      },
+    }));
+  };
+
   return (
     <Grid2 xs={12} lg={7}>
       <Card
@@ -28,65 +93,29 @@ function ExpenseChart() {
             </Typography>
           }
           action={
-            <Button
-              startIcon={
-                <ArrowClockwise className={DrawerStyles["action-active"]} />
-              }
-              size="small"
-              className={ExpenseChartStyles["mui-card-action-button"]}
-            >
-              Sync
-            </Button>
+            <>
+              {isMobile && (
+                <Button
+                  startIcon={
+                    <ArrowClockwise className={DrawerStyles["action-active"]} />
+                  }
+                  size="small"
+                  className={ExpenseChartStyles["mui-card-action-button"]}
+                  onClick={handleSyncClick}
+                >
+                  Sync
+                </Button>
+              )}
+            </>
           }
           className={ExpenseChartStyles["mui-card-header"]}
         />
-        <CardContent className={ExpenseChartStyles["mui-card-content"]}>
+        <CardContent
+          className={ExpenseChartStyles["mui-card-content"]}
+          sx={{ padding: { md: "24px 16px 8px!important" } }}
+        >
           <Chart
-            options={{
-              chart: {
-                id: "basic-bar",
-                toolbar: { show: false },
-              },
-              grid: {
-                show: true,
-                borderColor: "#dcdfe4",
-                strokeDashArray: 2,
-              },
-              colors: ["#635bff", "#635bff40"],
-              labels: [
-                "Jan",
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun",
-                "Jul",
-                "Aug",
-                "Sep",
-                "Oct",
-                "Nov",
-                "Dec",
-              ],
-              legend: {
-                show: false,
-              },
-              dataLabels: {
-                enabled: false,
-              },
-              yaxis: {
-                show: true,
-                labels: {
-                  formatter: function (val) {
-                    return val >= 1000 ? val / 1000 + "K" : val.toString();
-                  },
-                },
-              },
-              plotOptions: {
-                bar: {
-                  columnWidth: "150%",
-                },
-              },
-            }}
+            options={chartOptions}
             series={[
               {
                 name: "This year",
@@ -104,9 +133,8 @@ function ExpenseChart() {
                 ],
               },
             ]}
-            type="bar"
-            width="100%"
-            height="350px"
+            type={isMobile ? "line" : "bar"}
+            height="300px"
           />
         </CardContent>
         <Divider />
