@@ -1,4 +1,3 @@
-import Chart from "react-apexcharts";
 import {
   Button,
   Card,
@@ -6,17 +5,20 @@ import {
   CardContent,
   CardHeader,
   Divider,
+  MenuItem,
+  Select,
   Typography,
 } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import CardStyles from "../Card/card.module.css";
 import DrawerStyles from "../Drawer/drawer.module.css";
 import ExpenseChartStyles from "./expenseChart.module.css";
-import { ArrowClockwise, ArrowRight } from "@phosphor-icons/react";
+import { ArrowRight } from "@phosphor-icons/react";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
+import ApexChart from "./ApexChart";
 
-const ApexCharInit: Record<string, any> = {
+const ApexCharInit: ApexCharts.ApexOptions = {
   chart: {
     id: "apex-chart",
     width: "100%",
@@ -63,21 +65,63 @@ const ApexCharInit: Record<string, any> = {
     },
   },
 };
+type TchartSeries = {
+  name: string;
+  data: number[];
+};
+const chartSeries: TchartSeries[] = [
+  {
+    name: "This Year",
+    data: [
+      18000, 16000, 4500, 8000, 2500, 14000, 14000, 16000, 16500, 18500, 18000,
+      20000,
+    ],
+  },
+  {
+    name: "Last Year",
+    data: [
+      11000, 8000, 700, 5000, 4000, 11000, 8000, 12000, 14000, 17000, 10000,
+      7000,
+    ],
+  },
+];
+type TseriesOption = {
+  value: string;
+  label: string;
+};
+const seriesOptions: TseriesOption[] = [
+  { value: "ThisYear", label: "This Year" },
+  { value: "LastYear", label: "Last Year" },
+  { value: "ThisYear&LastYear", label: "See Both" },
+];
 
 function ExpenseChart() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const [chartOptions, setChartOptions] = useState(ApexCharInit);
+  const [selectedSeries, setSelectedSeries] = useState(["ThisYear"]);
 
-  const handleSyncClick = () => {
-    setChartOptions((prevOptions) => ({
-      ...prevOptions,
-      chart: {
-        ...prevOptions.chart,
-        selection: {
-          enabled: false,
-        },
-      },
-    }));
+  const [chartOptions] = useState(() => {
+    const newChartValue = {
+      ...ApexCharInit,
+    };
+
+    newChartValue["legend"] = {
+      show: true,
+      position: isMobile ? "bottom" : "right",
+    };
+    return newChartValue;
+  });
+
+  const handleSeriesChange = (event: any) => {
+    const selectedValue = event.target.value;
+    setSelectedSeries(selectedValue);
+  };
+
+  const visibleSeries = () => {
+    if (selectedSeries.includes("ThisYear&LastYear")) return chartSeries;
+
+    return chartSeries.filter((series) =>
+      selectedSeries.includes(series.name.replace(/ /g, ""))
+    );
   };
 
   return (
@@ -93,20 +137,23 @@ function ExpenseChart() {
             </Typography>
           }
           action={
-            <>
-              {isMobile && (
-                <Button
-                  startIcon={
-                    <ArrowClockwise className={DrawerStyles["action-active"]} />
-                  }
-                  size="small"
-                  className={ExpenseChartStyles["mui-card-action-button"]}
-                  onClick={handleSyncClick}
-                >
-                  Sync
-                </Button>
-              )}
-            </>
+            <Select
+              displayEmpty
+              value={selectedSeries}
+              onChange={handleSeriesChange}
+              SelectDisplayProps={{
+                className: ExpenseChartStyles["mui-card-action-select"],
+              }}
+              sx={{ mr: "15px" }}
+            >
+              {seriesOptions.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  <Typography color="text.secondary" variant="caption">
+                    {option.label}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Select>
           }
           className={ExpenseChartStyles["mui-card-header"]}
         />
@@ -114,27 +161,10 @@ function ExpenseChart() {
           className={ExpenseChartStyles["mui-card-content"]}
           sx={{ padding: { md: "24px 16px 8px!important" } }}
         >
-          <Chart
-            options={chartOptions}
-            series={[
-              {
-                name: "This year",
-                data: [
-                  18000, 16000, 4500, 8000, 2500, 14000, 14000, 16000, 16500,
-                  18500, 18000, 20000,
-                ],
-              },
-
-              {
-                name: "Last year",
-                data: [
-                  11000, 8000, 700, 5000, 4000, 11000, 8000, 12000, 14000,
-                  17000, 10000, 7000,
-                ],
-              },
-            ]}
-            type={isMobile ? "line" : "bar"}
-            height="300px"
+          <ApexChart
+            chartOptions={chartOptions}
+            visibleSeries={visibleSeries()}
+            isMobile={isMobile}
           />
         </CardContent>
         <Divider />
