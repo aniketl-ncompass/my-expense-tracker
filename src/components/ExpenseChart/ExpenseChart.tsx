@@ -159,7 +159,7 @@ function ExpenseChart() {
         />
         <CardContent
           className={ExpenseChartStyles["mui-card-content"]}
-          sx={{ padding: { md: "24px 16px 8px!important" } }}
+          sx={{ padding: { md: "0px 16px 8px!important" } }}
         >
           <ApexChart
             chartOptions={chartOptions}

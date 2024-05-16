@@ -10,7 +10,7 @@ function ApexChart({ chartOptions, visibleSeries, isMobile }: IApexChart) {
       options={chartOptions}
       series={visibleSeries}
       type={isMobile ? "line" : "bar"}
-      height={isMobile ? "300px" : "380px"}
+      height={"300px"}
     />
   );
 }
